@@ -38,10 +38,12 @@ class View1: UIViewController, MDCSwipeToChooseDelegate{
             }
         }
         
-        
-        var view = MDCSwipeToChooseView(frame: self.view.bounds, options: options)
-        //        view.imageView.image = UIImage(named: "photo.png")
+        var rect:CGRect = CGRectMake(self.view.bounds.size.width/2 - 120, self.view.bounds.size.height/2 - 150, 240, 300)
+        var view:MDCSwipeToChooseView = MDCSwipeToChooseView(frame: rect, options: options)
+//        view.imageView.image = UIImage(named: imageName)
+        view.imageView.contentMode = .ScaleAspectFill
         self.view.addSubview(view)
+        
         
         
     }
@@ -54,7 +56,9 @@ class View1: UIViewController, MDCSwipeToChooseDelegate{
     //左か右のどちらかに傾き切ったら、どちらを選択したのか確定
     func view(view: UIView, shouldBeChosenWithDirection: MDCSwipeDirection) -> Bool{
         if (shouldBeChosenWithDirection == MDCSwipeDirection.Left) {
-            return true;
+            return true; //NO
+        } else if (shouldBeChosenWithDirection == MDCSwipeDirection.Right){
+            return true; //YES
         } else {
             // Snap the view back and cancel the choice.
             UIView.animateWithDuration(0.16, animations: { () -> Void in
